@@ -1,0 +1,15 @@
+{
+  "schema": "rebotarm.identification_log/v1",
+  "recorded_at": "2026-11-07T12:52:40.301845+00:00",
+  "mapping_verified": true,
+  "simulated": false,
+  "sample_rate_hz": 100.0,
+  "trajectory_seed": 2903,
+  "trajectory_duration_s": 45.0,
+  "trajectory_profile": "broad",
+  "trajectory_segments": 16,
+  "segment_duration_s": 3.0,
+  "feedback_samples_rejected": 8303,
+  "position_units": "rad (URDF frame)",
+  "torque_units": "Nm (joint-side, URDF sign)"
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "rebotarm.identification_log/v1",
+  "simulated": true,
+  "mapping_verified": true,
+  "torque_source": "Pinocchio RNEA using nominal URDF",
+  "seed": 2903,
+  "sample_rate_hz": 100.0,
+  "independent_split": "validation"
+}

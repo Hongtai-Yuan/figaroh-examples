@@ -1,0 +1,90 @@
+# reBotArm dynamic-identification configuration.
+# Run commands from examples/rebotarm so all relative paths are stable.
+extends: "../../templates/manipulator_robot.yaml"
+
+robot:
+  name: "rebotarm"
+  description: "reBotArm 6-DOF manipulator (DM4340 x3, DM4310 x3)"
+  # Set this in a per-arm overlay when there is more than one physical unit.
+  # instance:
+  #   asset_id: "rebotarm-001"
+  #   operator: ""
+
+  properties:
+    joints:
+      active_joints: ["joint1", "joint2", "joint3", "joint4", "joint5", "joint6"]
+      # Exact limits from urdf/rebotarm.urdf.
+      joint_limits:
+        position: [-2.355, 2.355, 0.0, 3.14, 0.0, 3.5,
+                   -1.57, 1.7, -1.65, 1.65, -3.14, 3.14]
+        velocity: [5.0, 5.0, 5.0, 12.5, 12.5, 12.5]
+        acceleration: [10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
+        torque: [27.0, 27.0, 27.0, 7.0, 7.0, 7.0]
+    mechanics:
+      # motorbridge reports joint-side position/torque for the integrated DM drives.
+      reduction_ratios: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+      ratio_essential: 30.0
+      friction_coefficients:
+        viscous: [0, 0, 0, 0, 0, 0]
+        static: [0, 0, 0, 0, 0, 0]
+      actuator_inertias: [0, 0, 0, 0, 0, 0]
+      joint_offsets: [0, 0, 0, 0, 0, 0]
+
+tasks:
+  calibration:
+    enabled: false
+
+  identification:
+    enabled: true
+    # Direct constrained effort fit is selected because this arm's joint-1
+    # axial inertia is observable only as a combination. Exact reconstruction
+    # can preserve that combination yet make link1 individually infeasible.
+    select_stage: physical_fit
+    problem:
+      include_external_forces: false
+      use_joint_torques: true
+      # Start with rigid bodies only. Enable friction in the overlay below only
+      # after the rigid fit and torque/sign calibration pass independently.
+      wls: true
+      qr_relative_tolerance: 1.0e-5
+      model_components:
+        friction: false
+        joint_offset: false
+        actuator_inertia: false
+        static_regressor: true
+        inertia_regressor: true
+    signal_processing:
+      sampling_frequency: 100.0
+      cutoff_frequency: 8.0
+      filter_type: "butterworth"
+      filter_order: 4
+    data:
+      validation_data_file: ""
+    # Recover per-link values closest to the CAD model. `auto` tries the
+    # physically constrained SDP reconstruction before a nullspace fallback.
+    reconstruction:
+      enabled: true
+      method: "auto"
+    physical_fit:
+      enabled: true
+      solver: "cvxopt"
+      mass_min: 1.0e-6
+      prior_weight: 1.0e-6
+    physical_consistency:
+      enabled: true
+      mass_min: 1.0e-6
+      psd_eig_tol: 1.0e-9
+      solver: "cvxopt"
+
+  optimal_configuration:
+    enabled: false
+  optimal_trajectory:
+    enabled: false
+
+environment:
+  working_directory: "."
+  data_directory: "data"
+  results_directory: "results"
+
+
+

@@ -1,0 +1,11 @@
+# Deterministic pipeline self-test. This is not a claim about the real arm.
+extends: "rebotarm_unified_config.yaml"
+
+tasks:
+  identification:
+    signal_processing:
+      # RNEA truth is noiseless; retain almost all content. Real logs use the
+      # conservative 8 Hz cutoff in rebotarm_unified_config.yaml.
+      cutoff_frequency: 40.0
+    data:
+      validation_data_file: "data/simulated/validation.csv"

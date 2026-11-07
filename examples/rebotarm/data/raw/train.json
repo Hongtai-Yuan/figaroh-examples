@@ -1,0 +1,8 @@
+{
+  "schema": "rebotarm.raw_feedback/v1",
+  "recorded_at": "2026-11-07T12:28:25.359831+00:00",
+  "requested_rate_hz": 100.0,
+  "rows": 6000,
+  "enabled_or_commanded_by_recorder": false,
+  "warning": "Torque validity while disabled is not established."
+}

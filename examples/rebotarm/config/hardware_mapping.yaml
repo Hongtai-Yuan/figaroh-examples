@@ -1,0 +1,22 @@
+# motorbridge feedback -> URDF joint coordinates:
+#   q_urdf   = direction * q_motor + zero_offset_rad
+#   tau_urdf = direction * torque_scale * tau_motor
+# The direction also multiplies torque so power tau*dq is invariant.
+#
+# Two incompatible direction arrays exist in the checked-in historical code:
+#   old ROS driver:             [ 1, -1,  1, -1, 1, 1]
+#   current ROS configuration:  [ 1, -1, -1,  1, 1, 1]
+# The current ROS configuration is selected by the user as the authoritative
+# mapping. A low-torque first hardware test is still required before deployment.
+schema: rebotarm.hardware_mapping/v1
+verified: true
+verified_at: "2026-11-07"
+verified_by: "user-selected-current-ros-config"
+joint_names: [joint1, joint2, joint3, joint4, joint5, joint6]
+direction: [1, -1, -1, 1, 1, 1]
+zero_offset_rad: [0, 0, 0, 0, 0, 0]
+torque_scale: [1, 1, 1, 1, 1, 1]
+# tau_motor_command = direction * command_torque_scale * tau_urdf
+command_torque_scale: [1, 1, 1, 1, 1, 1]
+torque_units: "Nm_joint_side"
+notes: "Direction follows the current ROS config by user decision; zero offsets and torque scales remain nominal."

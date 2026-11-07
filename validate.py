@@ -115,6 +115,14 @@ EXAMPLE_SCRIPTS = {
         ("identification.py", 120, False, ["--verify", "--html-report"]),
         ("update_model.py", 120, False),
     ],
+    "rebotarm": [
+        (
+            "identification.py",
+            120,
+            False,
+            ["--no-plot", "--no-html-report", "--no-archive", "--no-verify"],
+        ),
+    ],
 }
 
 # --- Helpers -------------------------------------------------------------

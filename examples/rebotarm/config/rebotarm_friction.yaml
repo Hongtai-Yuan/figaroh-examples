@@ -1,0 +1,12 @@
+# Second-stage fit. Use only after rebotarm_unified_config.yaml passes on two
+# independent real recordings and torque signs/scales have been verified.
+extends: "rebotarm_unified_config.yaml"
+
+tasks:
+  identification:
+    problem:
+      model_components:
+        friction: true
+        joint_offset: true
+        actuator_inertia: false
+

@@ -1,0 +1,141 @@
+{
+  "schema": "rebotarm.static_gravity_model/v1",
+  "created_at": "2026-11-07T13:47:14.323676+00:00",
+  "accepted": true,
+  "deployment_status": "static_hold_test_passed",
+  "method": "paired-direction static median; scale-only correction selected on independent validation",
+  "hardware_validation": {
+    "date": "2026-11-07",
+    "status": "passed",
+    "type": "fixed-start-pose static hold with low MIT stiffness",
+    "motor_position_rad": [-0.00019073, 0.35039, -0.031854, -0.42020, -0.00095367, 0.00019073],
+    "tested_compensation_gain": [0.0, 0.2, 0.5, 1.0],
+    "full_gain_duration_sec": 8.0,
+    "full_gain_max_position_deviation_rad": 0.0084,
+    "full_gain_max_velocity_rad_s": 0.0659,
+    "hold_kp": 2.0,
+    "drag_test_performed": false
+  },
+  "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_sha256": "22ed7f1e0ab07f55752e2c7f49c80addf38cb5307daed1dc549501d8921ec6a2",
+  "urdf_change_note": "2026-11-07: joint4-6 velocity limits changed to 12.5 rad/s from the DM4310 rated-speed specification; inertial and gravity parameters unchanged",
+  "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_targeted_precise.csv",
+  "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_validation_precise.csv",
+  "gravity_scale": [
+    1.0,
+    0.6977780878035917,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "unselected_fitted_scale": [
+    1.0,
+    0.6977780878035917,
+    0.9676811397327315,
+    0.9463593912331747,
+    -2.590741306078791,
+    16.53920326747798
+  ],
+  "validation_rmse_nm": [
+    0.054142430661290014,
+    0.15068679759839726,
+    0.179342791116854,
+    0.07857048127273548,
+    0.11292424136326507,
+    0.0961053348225632
+  ],
+  "validation_rmse_limit_nm": [
+    0.2,
+    0.5,
+    0.5,
+    0.15,
+    0.15,
+    0.15
+  ],
+  "validation_overall_nominal_rmse_nm": 0.1735756974264588,
+  "validation_overall_selected_rmse_nm": 0.11969627583332997,
+  "calibrated_q_min_rad": [
+    -0.00019073486328125,
+    0.24986648559570312,
+    0.4232473373413086,
+    -0.5502786636352539,
+    -1.2008857727050781,
+    -0.029564857482910156
+  ],
+  "calibrated_q_max_rad": [
+    -0.00019073486328125,
+    0.8197908401489258,
+    1.1215381622314453,
+    0.10051918029785156,
+    1.2001218795776367,
+    0.02841949462890625
+  ],
+  "joint_diagnostics": [
+    {
+      "joint": "joint1",
+      "fitted_scale": 1.0,
+      "selected": false,
+      "gravity_range_nm": 1.4550555855682989e-16,
+      "nominal_rmse_nm": 0.054142430661290014,
+      "scaled_rmse_nm": 0.05414243066129001,
+      "improvement_fraction": 1.1102230246251565e-16,
+      "validation_r2": -215.19169939781656
+    },
+    {
+      "joint": "joint2",
+      "fitted_scale": 0.6977780878035917,
+      "selected": true,
+      "gravity_range_nm": 1.302866803479461,
+      "nominal_rmse_nm": 0.34280381663968984,
+      "scaled_rmse_nm": 0.15068679759839726,
+      "improvement_fraction": 0.5604284716678656,
+      "validation_r2": 0.856376802991838
+    },
+    {
+      "joint": "joint3",
+      "fitted_scale": 0.9676811397327315,
+      "selected": false,
+      "gravity_range_nm": 0.4524565620134249,
+      "nominal_rmse_nm": 0.179342791116854,
+      "scaled_rmse_nm": 0.20776924017991227,
+      "improvement_fraction": -0.1585034385047377,
+      "validation_r2": -0.34499254958138015
+    },
+    {
+      "joint": "joint4",
+      "fitted_scale": 0.9463593912331747,
+      "selected": false,
+      "gravity_range_nm": 0.1392884826264189,
+      "nominal_rmse_nm": 0.07857048127273548,
+      "scaled_rmse_nm": 0.05053916624087884,
+      "improvement_fraction": 0.35676649268004046,
+      "validation_r2": -1.1500776939981607
+    },
+    {
+      "joint": "joint5",
+      "fitted_scale": -2.590741306078791,
+      "selected": false,
+      "gravity_range_nm": 0.05029686554190845,
+      "nominal_rmse_nm": 0.11292424136326507,
+      "scaled_rmse_nm": 0.1242519992658098,
+      "improvement_fraction": -0.10031289797293885,
+      "validation_r2": -0.22495696782820374
+    },
+    {
+      "joint": "joint6",
+      "fitted_scale": 16.53920326747798,
+      "selected": false,
+      "gravity_range_nm": 4.916706572507504e-05,
+      "nominal_rmse_nm": 0.0961053348225632,
+      "scaled_rmse_nm": 0.10241786754587798,
+      "improvement_fraction": -0.0656834788096774,
+      "validation_r2": -0.2637223633002552
+    }
+  ],
+  "limitations": [
+    "no known calibration payload was attached, so absolute motor torque scale is not independently traceable",
+    "model is validated for static gravity inside the recorded joint envelope only",
+    "constant feedback offsets were not added to commanded torque"
+  ]
+}
