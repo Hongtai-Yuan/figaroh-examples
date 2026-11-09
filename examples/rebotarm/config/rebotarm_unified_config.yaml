@@ -26,7 +26,9 @@ robot:
       ratio_essential: 30.0
       friction_coefficients:
         viscous: [0, 0, 0, 0, 0, 0]
-        static: [0, 0, 0, 0, 0, 0]
+        # Two independent bidirectional sweeps per joint, validated 2026-11-09.
+        static: [0.36742395, 0.57933857, 1.45064730,
+                 0.15633613, 0.15662388, 0.13844589]
       actuator_inertias: [0, 0, 0, 0, 0, 0]
       joint_offsets: [0, 0, 0, 0, 0, 0]
 

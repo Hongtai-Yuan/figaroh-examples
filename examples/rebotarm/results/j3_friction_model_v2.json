@@ -1,6 +1,6 @@
 {
   "schema": "rebotarm.joint_friction_model/v1",
-  "created_at": "2026-11-09T05:36:43.029466+00:00",
+  "created_at": "2026-11-09T06:08:43.725087+00:00",
   "accepted": true,
   "joint": 3,
   "method": "steady bidirectional sweeps; tau minus nominal URDF gravity",
@@ -10,28 +10,28 @@
   "training_sha256": "a54433cc28129e3659e95bf0d60baa38c007a003b6d1807b2883ea9bbef0ac0f",
   "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/friction_j3_validation_v2.csv",
   "validation_sha256": "3d7d1d9c3d2859c02d6057e7031c8b7b1d34db1782235ddbf766e28f009fa2a2",
-  "training_samples": 1010,
-  "validation_samples": 464,
+  "training_samples": 3415,
+  "validation_samples": 3419,
   "training_coefficients": {
-    "viscous_nm_per_rad_s": -0.008984328647586238,
-    "coulomb_nm": 1.4508350911054926,
-    "offset_nm": 0.03454228216720026
+    "viscous_nm_per_rad_s": 0.05630786958023957,
+    "coulomb_nm": 1.4506473035694607,
+    "offset_nm": 0.0332133405611035
   },
   "validation_refit_coefficients": {
-    "viscous_nm_per_rad_s": -0.22907210102781592,
-    "coulomb_nm": 1.4505910192284668,
-    "offset_nm": 0.04389265609077733
+    "viscous_nm_per_rad_s": 0.12512698836380387,
+    "coulomb_nm": 1.4218132637895888,
+    "offset_nm": 0.028202507671534805
   },
   "deployed_coefficients": {
     "viscous_nm_per_rad_s": 0.0,
-    "coulomb_nm": 1.4508350911054926,
-    "offset_nm": 0.03454228216720026
+    "coulomb_nm": 1.4506473035694607,
+    "offset_nm": 0.0332133405611035
   },
   "viscous_repeatable": false,
-  "coulomb_relative_difference": 0.00016822854542332738,
-  "offset_difference_nm": 0.009350373923577071,
-  "training_rmse_nm": 0.20955185028299922,
-  "validation_refit_rmse_nm": 0.21544936193643024,
-  "validation_prediction_rmse_nm": 0.21681603423102702,
-  "training_design_condition_number": 35.48910461177602
+  "coulomb_relative_difference": 0.019876671406566484,
+  "offset_difference_nm": 0.005010832889568693,
+  "training_rmse_nm": 0.22905334589383322,
+  "validation_refit_rmse_nm": 0.24931227442347256,
+  "validation_prediction_rmse_nm": 0.25040934306650153,
+  "training_design_condition_number": 32.116275050227294
 }

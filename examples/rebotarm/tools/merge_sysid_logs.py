@@ -29,9 +29,11 @@ def main() -> None:
     dt_reference = None
     previous_end = None
     time_offset = 0.0
+    segments = []
+    total_rows = 0
     for name in args.inputs:
         path = Path(name).resolve()
-        frame = pd.read_csv(path, float_precision="round_trip")
+        frame = pd.read_csv(path)
         missing = [column for column in COLUMNS if column not in frame]
         if missing:
             raise ValueError(f"{path}: missing columns {missing}")
@@ -49,12 +51,21 @@ def main() -> None:
             raise ValueError("all logs must use the same sample period")
         start = frame[[f"q{i}" for i in range(1, 7)]].iloc[0].to_numpy(dtype=float)
         end = frame[[f"q{i}" for i in range(1, 7)]].iloc[-1].to_numpy(dtype=float)
-        if previous_end is not None and np.max(np.abs(start - previous_end)) > 0.12:
-            raise ValueError(f"{path}: boundary pose differs by more than 0.12 rad")
+        boundary_jump = None if previous_end is None else float(
+            np.max(np.abs(start - previous_end))
+        )
         frame["t"] = time_offset + np.arange(len(frame)) * dt_reference
         time_offset = float(frame["t"].iloc[-1] + dt_reference)
         previous_end = end
         frames.append(frame)
+        segments.append(
+            {
+                "start_row": total_rows,
+                "end_row_exclusive": total_rows + len(frame),
+                "boundary_jump_rad": boundary_jump,
+            }
+        )
+        total_rows += len(frame)
         sidecar = path.with_suffix(".json")
         sources.append(
             {
@@ -71,11 +82,13 @@ def main() -> None:
     output.with_suffix(".json").write_text(
         json.dumps(
             {
-                "schema": "rebotarm.merged_sysid_log/v1",
+                "schema": "rebotarm.merged_sysid_log/v2",
                 "created_at": datetime.now(timezone.utc).isoformat(),
                 "sources": sources,
                 "sample_rate_hz": 1.0 / dt_reference,
                 "rows": len(merged),
+                "segments": segments,
+                "differentiation_policy": "differentiate each source segment independently",
                 "split_integrity_rule": "inputs belong to one split only; validation is recorded separately",
             },
             indent=2,

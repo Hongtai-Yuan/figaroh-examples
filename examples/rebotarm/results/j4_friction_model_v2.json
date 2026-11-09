@@ -1,0 +1,37 @@
+{
+  "schema": "rebotarm.joint_friction_model/v1",
+  "created_at": "2026-11-09T06:08:44.465491+00:00",
+  "accepted": true,
+  "joint": 4,
+  "method": "steady bidirectional sweeps; tau minus nominal URDF gravity",
+  "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_sha256": "22ed7f1e0ab07f55752e2c7f49c80addf38cb5307daed1dc549501d8921ec6a2",
+  "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/friction_j4_train_v2.csv",
+  "training_sha256": "d50f853c9c0c18dc777b776025b87382f73f5a7fecb680b3697033fb755b6332",
+  "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/friction_j4_validation_v2.csv",
+  "validation_sha256": "cf48f9258e70407c37d4d1556e8183ebd7b5450e769887abaf9018bb475ff1df",
+  "training_samples": 1618,
+  "validation_samples": 1635,
+  "training_coefficients": {
+    "viscous_nm_per_rad_s": 0.008005262975080873,
+    "coulomb_nm": 0.15633612533204988,
+    "offset_nm": -0.12497754011353851
+  },
+  "validation_refit_coefficients": {
+    "viscous_nm_per_rad_s": 9.510966131098771e-05,
+    "coulomb_nm": 0.15773119692111107,
+    "offset_nm": -0.12788750115528139
+  },
+  "deployed_coefficients": {
+    "viscous_nm_per_rad_s": 0.0,
+    "coulomb_nm": 0.15633612533204988,
+    "offset_nm": -0.12497754011353851
+  },
+  "viscous_repeatable": false,
+  "coulomb_relative_difference": 0.008923539496057781,
+  "offset_difference_nm": 0.0029099610417428756,
+  "training_rmse_nm": 0.054875887387521555,
+  "validation_refit_rmse_nm": 0.054982960452004154,
+  "validation_prediction_rmse_nm": 0.0550629565847033,
+  "training_design_condition_number": 18.764212503987515
+}

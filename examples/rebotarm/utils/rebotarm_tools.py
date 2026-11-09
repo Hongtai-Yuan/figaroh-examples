@@ -84,12 +84,43 @@ class RebotArmIdentification(BaseIdentification):
                 f"URDF limits [{lower[joint]:.4f}, {upper[joint]:.4f}]; check mapping"
             )
 
-        q_kept, dq, ddq = calculate_first_second_order_differentiation(
-            self.model, q, self.identif_config
-        )
-        count = len(q_kept)
         sidecar = path.with_suffix(".json")
         metadata = json.loads(sidecar.read_text()) if sidecar.exists() else {}
+        if metadata.get("schema") == "rebotarm.merged_sysid_log/v2":
+            q_parts, dq_parts, ddq_parts, tau_parts, time_parts = [], [], [], [], []
+            segments = metadata.get("segments", [])
+            if not segments:
+                raise ValueError(f"{path}: merged log has no segment table")
+            expected_start = 0
+            for segment in segments:
+                start = int(segment["start_row"])
+                end = int(segment["end_row_exclusive"])
+                if start != expected_start or end <= start + 2 or end > len(q):
+                    raise ValueError(f"{path}: invalid or non-contiguous segment table")
+                q_part, dq_part, ddq_part = calculate_first_second_order_differentiation(
+                    self.model, q[start:end], self.identif_config
+                )
+                kept = len(q_part)
+                q_parts.append(q_part)
+                dq_parts.append(dq_part)
+                ddq_parts.append(ddq_part)
+                tau_parts.append(tau[start : start + kept])
+                time_parts.append(t[start : start + kept])
+                expected_start = end
+            if expected_start != len(q):
+                raise ValueError(f"{path}: segment table does not cover every row")
+            q_kept = np.vstack(q_parts)
+            dq = np.vstack(dq_parts)
+            ddq = np.vstack(ddq_parts)
+            tau_kept = np.vstack(tau_parts)
+            timestamps_kept = np.concatenate(time_parts)
+        else:
+            q_kept, dq, ddq = calculate_first_second_order_differentiation(
+                self.model, q, self.identif_config
+            )
+            count = len(q_kept)
+            tau_kept = tau[:count]
+            timestamps_kept = t[:count]
         self.trajectory_provenance = getattr(self, "trajectory_provenance", {})
         self.trajectory_provenance[str(path)] = {
             "file": str(path),
@@ -103,9 +134,9 @@ class RebotArmIdentification(BaseIdentification):
             "simulated": bool(metadata.get("simulated", False)),
         }
         return {
-            "timestamps": t[:count].reshape(-1, 1),
+            "timestamps": timestamps_kept.reshape(-1, 1),
             "positions": q_kept,
             "velocities": dq,
             "accelerations": ddq,
-            "torques": tau[:count],
+            "torques": tau_kept,
         }

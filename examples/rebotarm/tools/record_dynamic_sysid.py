@@ -108,7 +108,7 @@ class DynamicRecorder(Node):
                 self.samples.append((now - self.recording_started, q.copy(), dq.copy(), tau.copy()))
 
 
-def load_trajectory(path: Path) -> tuple[np.ndarray, np.ndarray, dict]:
+def load_trajectory(path: Path) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
     metadata_path = path.with_suffix(".json")
     if not metadata_path.exists():
         raise ValueError(f"missing trajectory metadata {metadata_path}")
@@ -127,22 +127,27 @@ def load_trajectory(path: Path) -> tuple[np.ndarray, np.ndarray, dict]:
         raise ValueError("trajectory needs six finite joint positions")
     if t[0] != 0.0 or t[-1] > 120.0:
         raise ValueError("trajectory must start at t=0 and last <=120 seconds")
-    if np.max(np.abs(q[0] - CENTER)) > 1e-6 or np.max(np.abs(q[-1] - CENTER)) > 1e-6:
+    centre = np.asarray(metadata.get("centre_rad"), dtype=float)
+    if centre.shape != (6,) or np.any(~np.isfinite(centre)):
+        raise ValueError("trajectory metadata needs a finite six-axis centre")
+    if np.any(centre < Q_LOWER) or np.any(centre > Q_UPPER):
+        raise ValueError("trajectory centre exceeds the recorder safety box")
+    if np.max(np.abs(q[0] - centre)) > 1e-6 or np.max(np.abs(q[-1] - centre)) > 1e-6:
         raise ValueError("trajectory must start and end at the safe centre")
     if np.any(q < Q_LOWER) or np.any(q > Q_UPPER):
         raise ValueError("trajectory position exceeds the recorder safety box")
-    return t, q, metadata
+    return t, q, centre, metadata
 
 
-def move_to_centre(node: DynamicRecorder) -> None:
+def move_to_centre(node: DynamicRecorder, centre: np.ndarray) -> None:
     wait_until(lambda: not node.busy, 4.0, "joint target remained busy")
     msg = Float64MultiArray()
-    msg.data = [*CENTER.tolist(), 4.0, 0.01]
+    msg.data = [*centre.tolist(), 4.0, 0.01]
     node.target_pub.publish(msg)
     wait_until(lambda: node.busy, 2.0, "centre move was not accepted")
     wait_until(lambda: not node.busy, 9.0, "centre move did not finish")
     wait_until(
-        lambda: node.latest_q is not None and np.max(np.abs(node.latest_q - CENTER)) <= 0.08,
+        lambda: node.latest_q is not None and np.max(np.abs(node.latest_q - centre)) <= 0.08,
         2.0,
         "robot did not reach the safe centre",
     )
@@ -180,7 +185,7 @@ def main() -> None:
     args = parse_args()
     trajectory_path = Path(args.trajectory).resolve()
     output = Path(args.output).resolve()
-    t_cmd, q_cmd, trajectory_metadata = load_trajectory(trajectory_path)
+    t_cmd, q_cmd, centre, trajectory_metadata = load_trajectory(trajectory_path)
     rclpy.init()
     node = DynamicRecorder()
     executor = rclpy.executors.MultiThreadedExecutor(num_threads=2)
@@ -194,7 +199,7 @@ def main() -> None:
         wait_until(lambda: node.target_pub.get_subscription_count() > 0, 5.0, "/dm_joint_target unavailable")
         if not node.action.wait_for_server(timeout_sec=5.0):
             raise RuntimeError("FollowJointTrajectory action server unavailable")
-        move_to_centre(node)
+        move_to_centre(node, centre)
 
         # Reject a noisy/stale link before enabling dynamic motion.
         with node.lock:

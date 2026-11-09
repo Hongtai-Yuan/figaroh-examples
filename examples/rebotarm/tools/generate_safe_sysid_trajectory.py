@@ -27,6 +27,7 @@ JERK_LIMIT = np.array([12.0, 12.0, 12.0, 18.0, 22.0, 26.0])
 EFFORT_LIMIT = np.array([27.0, 27.0, 27.0, 7.0, 7.0, 7.0])
 NOMINAL_TORQUE_LIMIT = 0.70 * EFFORT_LIMIT
 FREQUENCIES_HZ = np.array([0.07, 0.11, 0.17, 0.23, 0.31])
+FAST_FREQUENCIES_HZ = np.array([0.18, 0.29, 0.43, 0.61, 0.83])
 
 
 def derivatives(q: np.ndarray, dt: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -160,6 +161,15 @@ def parse_args():
     parser.add_argument("--objective-rate", type=float, default=10.0)
     parser.add_argument("--candidates", type=int, default=80)
     parser.add_argument("--intensity", type=float, default=0.72)
+    parser.add_argument(
+        "--center", type=float, nargs=6, default=CENTER.tolist(),
+        metavar=("Q1", "Q2", "Q3", "Q4", "Q5", "Q6"),
+        help="safe start/end centre in URDF radians",
+    )
+    parser.add_argument(
+        "--frequency-profile", choices=("slow", "fast"), default="slow",
+        help="fast uses smaller motion with higher acceleration for inertia excitation",
+    )
     args = parser.parse_args()
     if not 30.0 <= args.duration <= 120.0:
         parser.error("duration must be in [30,120] seconds")
@@ -173,7 +183,17 @@ def parse_args():
 
 
 def main():
+    global CENTER, TARGET_AMPLITUDE, FREQUENCIES_HZ
     args = parse_args()
+    if args.frequency_profile == "fast":
+        FREQUENCIES_HZ = FAST_FREQUENCIES_HZ.copy()
+    CENTER = np.asarray(args.center, dtype=float)
+    if np.any(CENTER <= Q_LOWER + 0.08) or np.any(CENTER >= Q_UPPER - 0.08):
+        raise ValueError("centre must retain at least 0.08 rad clearance from the safe box")
+    TARGET_AMPLITUDE = np.minimum(
+        TARGET_AMPLITUDE,
+        0.82 * np.minimum(CENTER - Q_LOWER, Q_UPPER - CENTER),
+    )
     urdf = Path(args.urdf).resolve()
     output = Path(args.output).resolve()
     model = pin.buildModelFromUrdf(str(urdf))
@@ -227,6 +247,8 @@ def main():
         "sample_rate_hz": args.sample_rate,
         "objective_rate_hz": args.objective_rate,
         "intensity": args.intensity,
+        "frequency_profile": args.frequency_profile,
+        "frequencies_hz": FREQUENCIES_HZ.tolist(),
         "centre_rad": CENTER.tolist(),
         "limits": {
             "position_lower_rad": Q_LOWER.tolist(),

@@ -17,8 +17,8 @@
     "drag_test_performed": false
   },
   "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
-  "urdf_sha256": "22ed7f1e0ab07f55752e2c7f49c80addf38cb5307daed1dc549501d8921ec6a2",
-  "urdf_change_note": "2026-11-07: joint4-6 velocity limits changed to 12.5 rad/s from the DM4310 rated-speed specification; inertial and gravity parameters unchanged",
+  "urdf_sha256": "15708e5a8a00b2413550e6b20844c3b1171f702bc839494dcfc37fa1f9cf013e",
+  "urdf_change_note": "2026-11-09: added independently validated joint Coulomb friction; inertial and gravity parameters unchanged",
   "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_targeted_precise.csv",
   "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_validation_precise.csv",
   "gravity_scale": [

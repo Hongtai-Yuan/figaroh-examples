@@ -12,22 +12,28 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pinocchio as pin
+from scipy.signal import butter, sosfiltfilt
 
 
 def load(path: Path, model: pin.Model, joint: int):
-    frame = pd.read_csv(path, float_precision="round_trip")
+    frame = pd.read_csv(path)
     t = frame["t"].to_numpy(dtype=float)
     q = frame[[f"q{i}" for i in range(1, 7)]].to_numpy(dtype=float)
     tau = frame[[f"tau{i}" for i in range(1, 7)]].to_numpy(dtype=float)
-    velocity = np.gradient(q, t, axis=0)
+    # The integrated motor encoders are quantised, especially on joints 4--6.
+    # Differentiating raw positions twice falsely labels constant-speed plateaus
+    # as high acceleration.  Use the same zero-phase filtering policy as the
+    # dynamic identification pipeline before differentiating.
+    q_filtered = sosfiltfilt(butter(4, 4.0, fs=100.0, output="sos"), q, axis=0)
+    velocity = np.gradient(q_filtered, t, axis=0)
     acceleration = np.gradient(velocity, t, axis=0)
     data = model.createData()
     gravity = np.asarray(
         [pin.computeGeneralizedGravity(model, data, position).copy() for position in q]
     )
     residual = tau[:, joint] - gravity[:, joint]
-    mask = (np.abs(velocity[:, joint]) > 0.05) & (
-        np.abs(acceleration[:, joint]) < 0.08
+    mask = (np.abs(velocity[:, joint]) > 0.04) & (
+        np.abs(acceleration[:, joint]) < 0.25
     )
     X = np.column_stack(
         (velocity[mask, joint], np.sign(velocity[mask, joint]), np.ones(mask.sum()))
@@ -69,9 +75,10 @@ def main() -> None:
     # noise and agrees across splits.  Otherwise deploy zero rather than a
     # large, cancellation-prone coefficient.
     fv_repeatable = (
-        abs(train_coefficient[0]) >= 0.05
+        train_coefficient[0] >= 0.05
+        and validation_coefficient[0] >= 0.0
         and abs(validation_coefficient[0] - train_coefficient[0])
-        <= 0.25 * abs(train_coefficient[0])
+        <= 0.25 * train_coefficient[0]
     )
     deployed = train_coefficient.copy()
     if not fv_repeatable:

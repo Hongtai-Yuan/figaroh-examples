@@ -96,6 +96,10 @@
       link="link1" />
     <axis
       xyz="0 0 1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="0.36742395" />
     <limit
       lower="-2.355"
       upper="2.355"
@@ -154,6 +158,10 @@
       link="link2" />
     <axis
       xyz="0 0 -1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="0.57933857" />
     <limit
       lower="0"
       upper="3.14"
@@ -212,6 +220,10 @@
       link="link3" />
     <axis
       xyz="0 0 1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="1.45064730" />
     <limit
       lower="0.0"
       upper="3.5"
@@ -270,6 +282,10 @@
       link="link4" />
     <axis
       xyz="0 0 1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="0.15633613" />
     <limit
       lower="-1.57"
       upper="1.7"
@@ -328,6 +344,10 @@
       link="link5" />
     <axis
       xyz="0 0 1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="0.15662388" />
     <limit
       lower="-1.65"
       upper="1.65"
@@ -386,6 +406,10 @@
       link="link6" />
     <axis
       xyz="0 0 1" />
+    <!-- Independently validated 2026-11-09; viscous term was not repeatable. -->
+    <dynamics
+      damping="0"
+      friction="0.13844589" />
     <limit
       lower="-3.14"
       upper="3.14"
