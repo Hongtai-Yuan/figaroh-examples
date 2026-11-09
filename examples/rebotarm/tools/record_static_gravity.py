@@ -60,6 +60,39 @@ def single_joint_sweep() -> np.ndarray:
 
 
 TARGETED_POSES = single_joint_sweep()
+# Multi-axis poses deliberately change the gravity lever arms of joints 3--5.
+# Every coordinate stays inside the previously exercised forward workspace;
+# validation poses are distinct interpolating configurations.
+GRAVITY_V3_TRAIN_POSES = np.array(
+    [
+        [0.0, 0.22, 0.42, -0.55, -1.10, 0.0],
+        [0.0, 0.22, 0.42, -0.55, 1.10, 0.0],
+        [0.0, 0.22, 0.90, -0.10, -0.55, 0.0],
+        [0.0, 0.22, 0.90, -0.10, 0.55, 0.0],
+        [0.0, 0.52, 0.65, -0.55, -0.55, 0.0],
+        [0.0, 0.52, 0.65, -0.55, 0.55, 0.0],
+        [0.0, 0.52, 1.05, 0.05, -1.10, 0.0],
+        [0.0, 0.52, 1.05, 0.05, 1.10, 0.0],
+        [0.0, 0.82, 0.45, -0.15, -1.10, 0.0],
+        [0.0, 0.82, 0.45, -0.15, 1.10, 0.0],
+        [0.0, 0.82, 1.12, -0.55, -0.55, 0.0],
+        [0.0, 0.82, 1.12, -0.55, 0.55, 0.0],
+    ],
+    dtype=float,
+)
+GRAVITY_V3_VALIDATION_POSES = np.array(
+    [
+        [0.0, 0.32, 0.52, -0.45, -0.80, 0.0],
+        [0.0, 0.32, 0.52, -0.45, 0.80, 0.0],
+        [0.0, 0.42, 0.95, -0.02, -0.80, 0.0],
+        [0.0, 0.42, 0.95, -0.02, 0.80, 0.0],
+        [0.0, 0.70, 0.55, -0.30, -0.80, 0.0],
+        [0.0, 0.70, 0.55, -0.30, 0.80, 0.0],
+        [0.0, 0.72, 1.00, -0.45, -0.80, 0.0],
+        [0.0, 0.72, 1.00, -0.45, 0.80, 0.0],
+    ],
+    dtype=float,
+)
 APPROACH_DELTA = np.array([0.0, 0.055, 0.055, 0.040, 0.050, 0.0])
 
 
@@ -155,7 +188,9 @@ def main() -> None:
     parser.add_argument("--output", required=True)
     parser.add_argument("--seed", type=int, default=7301)
     parser.add_argument(
-        "--pose-set", choices=("train", "validation", "targeted"), default="train"
+        "--pose-set",
+        choices=("train", "validation", "targeted", "gravity-v3-train", "gravity-v3-validation"),
+        default="train",
     )
     parser.add_argument("--settle", type=float, default=1.2)
     parser.add_argument("--measure", type=float, default=1.2)
@@ -167,6 +202,8 @@ def main() -> None:
         "train": TRAIN_POSES,
         "validation": VALIDATION_POSES,
         "targeted": TARGETED_POSES,
+        "gravity-v3-train": GRAVITY_V3_TRAIN_POSES,
+        "gravity-v3-validation": GRAVITY_V3_VALIDATION_POSES,
     }[args.pose_set]
 
     rclpy.init()

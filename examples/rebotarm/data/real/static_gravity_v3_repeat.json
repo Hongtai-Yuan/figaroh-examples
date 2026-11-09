@@ -1,0 +1,13 @@
+{
+  "schema": "rebotarm.static_gravity/v1",
+  "recorded_at": "2026-11-09T11:41:47.245279+00:00",
+  "payload": "no added calibration mass",
+  "pose_set": "gravity-v3-validation",
+  "pose_count": 8,
+  "paired_approaches": true,
+  "feedback_frames_received": 48137,
+  "feedback_frames_rejected": 56,
+  "mapping_verified": true,
+  "position_units": "rad (URDF frame)",
+  "torque_units": "motor-reported Nm (URDF sign)"
+}

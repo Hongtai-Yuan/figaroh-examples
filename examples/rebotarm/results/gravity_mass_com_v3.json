@@ -1,0 +1,231 @@
+{
+  "schema": "rebotarm.gravity_mass_com/v1",
+  "created_at": "2026-11-09T11:44:49.908656+00:00",
+  "accepted": false,
+  "deployment_scope": "gravity_only",
+  "urdf_source": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_source_sha256": "15708e5a8a00b2413550e6b20844c3b1171f702bc839494dcfc37fa1f9cf013e",
+  "urdf_output": null,
+  "urdf_output_sha256": null,
+  "data": {
+    "train": {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_train.csv",
+      "sha256": "f297b2ec9aca0d926e419c415f72ae5008dd6c042bae92ce86d5f963ee982915"
+    },
+    "validation": {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_validation.csv",
+      "sha256": "c0380bde20df8770656ead1c7f073d77ff244f81efd6cf12559c75802d000989"
+    },
+    "repeat": {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_repeat.csv",
+      "sha256": "444c87e30358a6904c1a6f5021e25460ca268b660334daa2e3cb3b24ae8c0cda"
+    }
+  },
+  "friction_models": [
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j1_friction_model_v2.json",
+      "sha256": "cbe242175e27531b1aa6b75ba6f3d0162660f8d96c286af1f8c8fc648c310f39"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j2_friction_model_v2.json",
+      "sha256": "d1f77c05016efbc53a4f76c2b0fbed7a97e1d7bb00f0f11cb53557f19f31d4e2"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j3_friction_model_v2.json",
+      "sha256": "722b73458d2bd25d0c874a038a7af51d15cb4cd502f383e05d41a3b377c9c91b"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j4_friction_model_v2.json",
+      "sha256": "e275f418acf49d1bfef40961ff35bfb1d59aacde452d3ba3875a6282edcc5258"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j5_friction_model_v2.json",
+      "sha256": "7b7a436d45f1980f7a0bc9a1109f8f56dee555e09cd4bacd81933825dbdbcc3e"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j6_friction_model_v2.json",
+      "sha256": "80d010436d0b4874185b492f158b020f6baf8b87dcd700078258617296a7567b"
+    }
+  ],
+  "torque_offsets_subtracted_nm": [
+    -0.0005135883960789005,
+    -0.18314468705165493,
+    0.0332133405611035,
+    -0.12497754011353851,
+    0.0045901822422176625,
+    0.009610875724015713
+  ],
+  "hyperparameter_policy": "leave-one-pose-out CV on training only",
+  "ridge_trials": [
+    {
+      "ridge": 0.001,
+      "mean_rmse_nm": 0.10745348857158397
+    },
+    {
+      "ridge": 0.0031622776601683794,
+      "mean_rmse_nm": 0.10735454228538993
+    },
+    {
+      "ridge": 0.01,
+      "mean_rmse_nm": 0.10709334230899474
+    },
+    {
+      "ridge": 0.03162277660168379,
+      "mean_rmse_nm": 0.10667074039596337
+    },
+    {
+      "ridge": 0.1,
+      "mean_rmse_nm": 0.10724918598680207
+    },
+    {
+      "ridge": 0.31622776601683794,
+      "mean_rmse_nm": 0.11139962441047117
+    },
+    {
+      "ridge": 1.0,
+      "mean_rmse_nm": 0.11779077904041065
+    },
+    {
+      "ridge": 3.1622776601683795,
+      "mean_rmse_nm": 0.12142359529615598
+    },
+    {
+      "ridge": 10.0,
+      "mean_rmse_nm": 0.12153008604851669
+    },
+    {
+      "ridge": 31.622776601683793,
+      "mean_rmse_nm": 0.1205282640518298
+    },
+    {
+      "ridge": 100.0,
+      "mean_rmse_nm": 0.12031758247286027
+    },
+    {
+      "ridge": 316.22776601683796,
+      "mean_rmse_nm": 0.12142698724984406
+    },
+    {
+      "ridge": 1000.0,
+      "mean_rmse_nm": 0.12272718364776547
+    }
+  ],
+  "selected_ridge": 0.03162277660168379,
+  "identified_mass_kg": [
+    0.0381997659760001,
+    0.524550280509516,
+    1.179726797926697,
+    0.09756242069054818,
+    0.45867254745525365,
+    0.2772258093392674
+  ],
+  "identified_com_m": [
+    [
+      0.00830194407024594,
+      0.000328204170966265,
+      0.028911416748468
+    ],
+    [
+      -0.12782178041026745,
+      -0.06548424683648091,
+      -0.02940558509672069
+    ],
+    [
+      0.15921065270477153,
+      0.02944193433554561,
+      -0.031861447035666166
+    ],
+    [
+      0.23933767402425835,
+      0.09287668154892414,
+      -0.02870589563558653
+    ],
+    [
+      0.01653066992631649,
+      -0.019546152609877552,
+      0.03397734590557042
+    ],
+    [
+      -0.02148038602691419,
+      0.0007045200726712722,
+      -0.005844632186854083
+    ]
+  ],
+  "rotational_inertia_policy": "unchanged from source URDF",
+  "training": {
+    "overall_rmse_nm": 0.09194239803949102,
+    "per_joint_rmse_nm": [
+      0.03367372849845238,
+      0.12046209784962625,
+      0.1624645678936414,
+      0.03978414121592684,
+      0.08415771409364953,
+      0.003918645118904015
+    ]
+  },
+  "validation": {
+    "overall_rmse_nm": 0.12815344187475278,
+    "per_joint_rmse_nm": [
+      0.03460243400392635,
+      0.13047205057314976,
+      0.2489420758016099,
+      0.1244996952628322,
+      0.0532112778803486,
+      0.003971428924578511
+    ]
+  },
+  "repeat": {
+    "overall_rmse_nm": 0.12934005156129355,
+    "per_joint_rmse_nm": [
+      0.03638880782621594,
+      0.12613848288183685,
+      0.2522615400168258,
+      0.1277364605458006,
+      0.05634809676513142,
+      0.0032304016842559648
+    ]
+  },
+  "nominal_validation": {
+    "overall_rmse_nm": 0.14799723639109072,
+    "per_joint_rmse_nm": [
+      0.03460243400392633,
+      0.13233649589599936,
+      0.3009072175517599,
+      0.11614885081144824,
+      0.07567615981469125,
+      0.05427913970867105
+    ]
+  },
+  "nominal_repeat": {
+    "overall_rmse_nm": 0.1501062699907428,
+    "per_joint_rmse_nm": [
+      0.03638880782621593,
+      0.13136707849060542,
+      0.3049708658091064,
+      0.12141693297710164,
+      0.07444105314297401,
+      0.05761187462733216
+    ]
+  },
+  "per_joint_rmse_limit_nm": [
+    0.1,
+    0.2,
+    0.35,
+    0.15,
+    0.1,
+    0.06
+  ],
+  "acceptance_checks": {
+    "positive_mass": true,
+    "com_within_0_30_m": true,
+    "validation_per_joint_rmse": true,
+    "repeat_per_joint_rmse": true,
+    "validation_improvement_20_percent": false,
+    "repeat_improvement_20_percent": false
+  },
+  "limitations": [
+    "mass and COM are regularized effective gravity parameters, not independently weighed CAD truth",
+    "exported URDF is accepted for gravity calculation only",
+    "rotational inertias remain unchanged because dynamic cross-pose validation failed"
+  ]
+}
