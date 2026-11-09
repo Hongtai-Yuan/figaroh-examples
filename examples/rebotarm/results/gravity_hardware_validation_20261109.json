@@ -1,0 +1,36 @@
+{
+  "schema": "rebotarm.gravity_hardware_validation/v1",
+  "date": "2026-11-09",
+  "accepted_for_manual_drag": false,
+  "verdict": "blocked_by_motorbridge_feedback_corruption",
+  "authoritative_joint_direction": [1, -1, -1, 1, 1, 1],
+  "offline_gravity_scale": [1.0, 0.8913045064533454, 1.0, 1.0, 1.0, 1.0],
+  "staged_tests": [
+    {
+      "gravity_gain": 0.5,
+      "joint2_scale": 0.8913045064533454,
+      "hold_kp": [80, 80, 80, 40, 10, 10],
+      "duration_s": 5,
+      "passed": true,
+      "max_position_deviation_rad": 0.0427,
+      "max_velocity_rad_s": 0.0073
+    },
+    {
+      "gravity_gain": 1.0,
+      "joint2_scale": 0.8913045064533454,
+      "hold_kp": [80, 80, 80, 40, 10, 10],
+      "duration_s": 5,
+      "passed": true,
+      "max_position_deviation_rad": 0.0164,
+      "max_velocity_rad_s": 0.0171
+    }
+  ],
+  "low_stiffness_result": "inconclusive",
+  "transport_evidence": [
+    "joint5 feedback became approximately equal to joint3 while joint5 was physically near zero",
+    "joint2 feedback became exactly equal to joint4 in a later run",
+    "the safety controller rejected these impossible greater-than-0.08-rad single-frame jumps before computing a new torque"
+  ],
+  "deployment_rule": "Do not use the direct motorbridge path for low-stiffness or manual-drag gravity compensation. Re-test through the ROS dm_controller feedback path before changing deployment_status.",
+  "final_motor_status": [0, 0, 0, 0, 0, 0]
+}

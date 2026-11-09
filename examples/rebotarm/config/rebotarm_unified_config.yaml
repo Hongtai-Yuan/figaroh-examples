@@ -31,6 +31,11 @@ robot:
                  0.15633613, 0.15662388, 0.13844589]
       actuator_inertias: [0, 0, 0, 0, 0, 0]
       joint_offsets: [0, 0, 0, 0, 0, 0]
+      # Cross-campaign static calibration; offline-validated only.  The
+      # 2026-11-09 low-stiffness hardware verdict is blocked by corrupted
+      # motorbridge feedback, so this must not yet enable manual-drag mode.
+      # Standard URDF/RNEA parsers do not consume this custom field.
+      gravity_scale: [1.0, 0.891304506, 1.0, 1.0, 1.0, 1.0]
 
 tasks:
   calibration:

@@ -1,0 +1,128 @@
+{
+  "schema": "rebotarm.static_gravity_model/v1",
+  "created_at": "2026-11-09T12:02:09.760974+00:00",
+  "accepted": false,
+  "deployment_status": "offline_only",
+  "method": "paired-direction static median; scale-only correction selected on independent validation",
+  "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_sha256": "15708e5a8a00b2413550e6b20844c3b1171f702bc839494dcfc37fa1f9cf013e",
+  "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_extrema_train.csv",
+  "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_extrema_validation.csv",
+  "gravity_scale": [
+    1.0,
+    0.8850046622823581,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "unselected_fitted_scale": [
+    1.0,
+    0.8850046622823581,
+    0.9874696601291968,
+    0.877008252682253,
+    0.6089188732471976,
+    37.229975735270486
+  ],
+  "validation_rmse_nm": [
+    0.036608783868296614,
+    0.24031496014202605,
+    0.26309388778346443,
+    0.15795766057159175,
+    0.09753699226104691,
+    0.11908045710525374
+  ],
+  "validation_rmse_limit_nm": [
+    0.2,
+    0.5,
+    0.5,
+    0.15,
+    0.15,
+    0.15
+  ],
+  "validation_overall_nominal_rmse_nm": 0.2141305353192458,
+  "validation_overall_selected_rmse_nm": 0.17173337841470776,
+  "calibrated_q_min_rad": [
+    -0.00019073486328125,
+    0.23632431030273438,
+    0.3770885467529297,
+    -0.5725946426391602,
+    -1.144235610961914,
+    -0.6425952911376953
+  ],
+  "calibrated_q_max_rad": [
+    -0.00019073486328125,
+    0.8134965896606445,
+    1.160639762878418,
+    0.07496070861816406,
+    1.1037988662719727,
+    0.7852668762207031
+  ],
+  "joint_diagnostics": [
+    {
+      "joint": "joint1",
+      "fitted_scale": 1.0,
+      "selected": false,
+      "gravity_range_nm": 5.342930199832285e-16,
+      "nominal_rmse_nm": 0.036608783868296614,
+      "scaled_rmse_nm": 0.036608783868296614,
+      "improvement_fraction": 0.0,
+      "validation_r2": -127.98661122879463
+    },
+    {
+      "joint": "joint2",
+      "fitted_scale": 0.8850046622823581,
+      "selected": true,
+      "gravity_range_nm": 4.547111860701595,
+      "nominal_rmse_nm": 0.3948524755327347,
+      "scaled_rmse_nm": 0.24031496014202605,
+      "improvement_fraction": 0.39138038879509807,
+      "validation_r2": 0.9813302856562616
+    },
+    {
+      "joint": "joint3",
+      "fitted_scale": 0.9874696601291968,
+      "selected": false,
+      "gravity_range_nm": 3.1339199234877917,
+      "nominal_rmse_nm": 0.26309388778346443,
+      "scaled_rmse_nm": 0.2482131468294386,
+      "improvement_fraction": 0.05656057265105763,
+      "validation_r2": 0.9525139910293291
+    },
+    {
+      "joint": "joint4",
+      "fitted_scale": 0.877008252682253,
+      "selected": false,
+      "gravity_range_nm": 0.5594106086144943,
+      "nominal_rmse_nm": 0.15795766057159175,
+      "scaled_rmse_nm": 0.13314307934321234,
+      "improvement_fraction": 0.15709640886415,
+      "validation_r2": 0.7361361492628793
+    },
+    {
+      "joint": "joint5",
+      "fitted_scale": 0.6089188732471976,
+      "selected": false,
+      "gravity_range_nm": 0.621633231517263,
+      "nominal_rmse_nm": 0.09753699226104691,
+      "scaled_rmse_nm": 0.09292694551269598,
+      "improvement_fraction": 0.047264598194833085,
+      "validation_r2": 0.7757640262637315
+    },
+    {
+      "joint": "joint6",
+      "fitted_scale": 37.229975735270486,
+      "selected": false,
+      "gravity_range_nm": 0.0007964069823358346,
+      "nominal_rmse_nm": 0.11908045710525374,
+      "scaled_rmse_nm": 0.12798503694352437,
+      "improvement_fraction": -0.07477784394461962,
+      "validation_r2": -0.2653270765659548
+    }
+  ],
+  "limitations": [
+    "no known calibration payload was attached, so absolute motor torque scale is not independently traceable",
+    "model is validated for static gravity inside the recorded joint envelope only",
+    "constant feedback offsets were not added to commanded torque"
+  ]
+}

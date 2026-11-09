@@ -1,6 +1,6 @@
 {
   "schema": "rebotarm.validated_residual_dynamics/v2",
-  "created_at": "2026-11-09T11:26:01.937308+00:00",
+  "created_at": "2026-11-09T12:04:20.265822+00:00",
   "accepted": true,
   "deployment_status": "validated_not_hardware_deployed",
   "method": "accepted static gravity plus regularized viscous/Coulomb/bias residual",
@@ -8,7 +8,7 @@
   "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
   "urdf_sha256": "15708e5a8a00b2413550e6b20844c3b1171f702bc839494dcfc37fa1f9cf013e",
   "gravity_model": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/static_gravity_model.json",
-  "gravity_model_sha256": "8e5b70b467712643649d8abf10bd884ce59d1df58c0aec3115c7e9ead6990ad2",
+  "gravity_model_sha256": "7221943fd28fcaafb973b7b30da80debc639a9f3234bc15a3738903ce3acf343",
   "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/sysid_train_v2.csv",
   "training_sha256": "a5e646845950be23b7834ef9099283c6842d88f0ac3a18bebb87820203e25f73",
   "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/sysid_validation_v2.csv",
@@ -17,163 +17,163 @@
     "policy": "alternating 5 s blocked split of training data only",
     "selected_transition_width_rad_s": 0.005,
     "selected_ridge": 10.0,
-    "internal_cv_rmse_nm": 0.3164688263837881,
+    "internal_cv_rmse_nm": 0.31632366353429703,
     "trials": [
       {
         "transition_width_rad_s": 0.005,
         "ridge": 10.0,
-        "rmse_nm": 0.3164688263837881
+        "rmse_nm": 0.31632366353429703
       },
       {
         "transition_width_rad_s": 0.005,
         "ridge": 31.6227766,
-        "rmse_nm": 0.31652815917742716
+        "rmse_nm": 0.31637918878715066
       },
       {
         "transition_width_rad_s": 0.005,
         "ridge": 100.0,
-        "rmse_nm": 0.31673501935433596
+        "rmse_nm": 0.3165738927885311
       },
       {
         "transition_width_rad_s": 0.005,
         "ridge": 316.227766,
-        "rmse_nm": 0.3175338952823863
+        "rmse_nm": 0.3173439277864325
       },
       {
         "transition_width_rad_s": 0.005,
         "ridge": 1000.0,
-        "rmse_nm": 0.3209487482018825
+        "rmse_nm": 0.3206215517929028
       },
       {
         "transition_width_rad_s": 0.005,
         "ridge": 3162.27766,
-        "rmse_nm": 0.3327635843084263
+        "rmse_nm": 0.33183958700525484
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 10.0,
-        "rmse_nm": 0.32318396570738184
+        "rmse_nm": 0.32305300974503137
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 31.6227766,
-        "rmse_nm": 0.32304678630909706
+        "rmse_nm": 0.32291164542921774
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 100.0,
-        "rmse_nm": 0.32292556913707876
+        "rmse_nm": 0.3227771929402506
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 316.227766,
-        "rmse_nm": 0.32374670371434
+        "rmse_nm": 0.3235559625605044
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 1000.0,
-        "rmse_nm": 0.3277418778135805
+        "rmse_nm": 0.327408319614867
       },
       {
         "transition_width_rad_s": 0.01,
         "ridge": 3162.27766,
-        "rmse_nm": 0.3409536625724479
+        "rmse_nm": 0.3400375417148835
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 10.0,
-        "rmse_nm": 0.3483024002087863
+        "rmse_nm": 0.3482933285074033
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 31.6227766,
-        "rmse_nm": 0.3481273485376392
+        "rmse_nm": 0.3481130456765786
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 100.0,
-        "rmse_nm": 0.34759487727665306
+        "rmse_nm": 0.34756395059363565
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 316.227766,
-        "rmse_nm": 0.34611415403526874
+        "rmse_nm": 0.346029914801834
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 1000.0,
-        "rmse_nm": 0.3474126157322773
+        "rmse_nm": 0.34715754485981004
       },
       {
         "transition_width_rad_s": 0.02,
         "ridge": 3162.27766,
-        "rmse_nm": 0.36101502417169223
+        "rmse_nm": 0.3601458105557571
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 10.0,
-        "rmse_nm": 0.36570990648931584
+        "rmse_nm": 0.3657839019198927
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 31.6227766,
-        "rmse_nm": 0.3655334632378121
+        "rmse_nm": 0.36560163656752415
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 100.0,
-        "rmse_nm": 0.36499596448125793
+        "rmse_nm": 0.3650456790284265
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 316.227766,
-        "rmse_nm": 0.36349337001674664
+        "rmse_nm": 0.36348429699079304
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 1000.0,
-        "rmse_nm": 0.3623937064871414
+        "rmse_nm": 0.36219738091837933
       },
       {
         "transition_width_rad_s": 0.03,
         "ridge": 3162.27766,
-        "rmse_nm": 0.37703658422935243
+        "rmse_nm": 0.37620339678499615
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 10.0,
-        "rmse_nm": 0.38858729444556983
+        "rmse_nm": 0.3887443960563206
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 31.6227766,
-        "rmse_nm": 0.3884370237253287
+        "rmse_nm": 0.38858774891051756
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 100.0,
-        "rmse_nm": 0.3879799476869059
+        "rmse_nm": 0.388110503209507
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 316.227766,
-        "rmse_nm": 0.38670895381468856
+        "rmse_nm": 0.38677571656410414
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 1000.0,
-        "rmse_nm": 0.38470794348747267
+        "rmse_nm": 0.3845743295517635
       },
       {
         "transition_width_rad_s": 0.05,
         "ridge": 3162.27766,
-        "rmse_nm": 0.40113485958067485
+        "rmse_nm": 0.40034466598988394
       }
     ]
   },
   "gravity_scale": [
     1.0,
-    0.6977780878035917,
+    0.8913045064533454,
     1.0,
     1.0,
     1.0,
@@ -182,46 +182,46 @@
   "coefficients": {
     "viscous_nm_per_rad_s": [
       0.0,
-      0.06579171710800144,
+      0.05374170688628927,
       0.04603188582718313,
-      0.31518131856947723,
-      0.0757205192589317,
-      0.05786772703786303
+      0.3151813185694783,
+      0.07572051925893099,
+      0.057867727037862714
     ],
     "coulomb_nm": [
-      0.3961450688296007,
-      0.5878889068556371,
+      0.39614506882960054,
+      0.5886666904904932,
       1.4786008303717075,
-      0.11714449024781146,
-      0.10906941614294054,
-      0.10366011406518146
+      0.11714449024781141,
+      0.10906941614294047,
+      0.10366011406518154
     ],
     "constant_bias_nm": [
-      -0.034150428359518294,
-      0.20196072880393412,
+      -0.034150428359518474,
+      0.02895691361189779,
       0.3199779701604239,
-      -0.09866845217403268,
+      -0.09866845217403263,
       0.024994818912133357,
-      0.0020810984161293566
+      0.002081098416129411
     ]
   },
   "training_rmse_nm": {
-    "overall": 0.3140874618303985,
+    "overall": 0.3141047925367755,
     "per_joint": [
-      0.18783019824083713,
-      0.30245636650745095,
+      0.18783019824083716,
+      0.3025643332151735,
       0.672883786621692,
       0.06390623964309622,
-      0.06716709135823017,
-      0.06146176971987083
+      0.06716709135823018,
+      0.061461769719870815
     ]
   },
   "validation": {
     "nominal_rmse_nm": {
-      "overall": 0.6260321596450997,
+      "overall": 0.6211111742829173,
       "per_joint": [
         0.384843339115246,
-        0.5814134918914078,
+        0.5488338582927819,
         1.3447760432080549,
         0.17087581693953752,
         0.11801964065187168,
@@ -229,17 +229,17 @@
       ]
     },
     "identified_rmse_nm": {
-      "overall": 0.3337342912000599,
+      "overall": 0.3332567841860282,
       "per_joint": [
         0.1826272613146669,
-        0.28146497745725674,
+        0.2780495927604534,
         0.736491963211256,
-        0.06818905064757495,
+        0.06818905064757498,
         0.06403012357501997,
         0.06727701983967593
       ]
     },
-    "overall_improvement_fraction": 0.4669055158615889,
+    "overall_improvement_fraction": 0.4634506703718888,
     "per_joint_limit_nm": [
       0.3,
       0.4,

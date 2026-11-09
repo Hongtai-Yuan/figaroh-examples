@@ -1,29 +1,80 @@
 {
   "schema": "rebotarm.static_gravity_model/v1",
-  "created_at": "2026-11-07T13:47:14.323676+00:00",
+  "created_at": "2026-11-09T12:05:09.162083+00:00",
   "accepted": true,
-  "deployment_status": "static_hold_test_passed",
-  "method": "paired-direction static median; scale-only correction selected on independent validation",
-  "hardware_validation": {
-    "date": "2026-11-07",
-    "status": "passed",
-    "type": "fixed-start-pose static hold with low MIT stiffness",
-    "motor_position_rad": [-0.00019073, 0.35039, -0.031854, -0.42020, -0.00095367, 0.00019073],
-    "tested_compensation_gain": [0.0, 0.2, 0.5, 1.0],
-    "full_gain_duration_sec": 8.0,
-    "full_gain_max_position_deviation_rad": 0.0084,
-    "full_gain_max_velocity_rad_s": 0.0659,
-    "hold_kp": 2.0,
-    "drag_test_performed": false
-  },
+  "deployment_status": "offline_validated_hardware_blocked_by_feedback_transport",
+  "method": "paired-direction medians across repeated campaigns; known offsets removed",
   "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
   "urdf_sha256": "15708e5a8a00b2413550e6b20844c3b1171f702bc839494dcfc37fa1f9cf013e",
-  "urdf_change_note": "2026-11-09: added independently validated joint Coulomb friction; inertial and gravity parameters unchanged",
-  "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_targeted_precise.csv",
-  "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_validation_precise.csv",
+  "training_data": [
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_targeted_precise.csv",
+      "sha256": "9aebe13a2d9f4276360583f15dbea4ab085255e99142b0c102466b3574bd17c8"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_train.csv",
+      "sha256": "f297b2ec9aca0d926e419c415f72ae5008dd6c042bae92ce86d5f963ee982915"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_extrema_train.csv",
+      "sha256": "0a033d2ec6611b0e659726953f80fdd213508a98b113957d42f8de5c383c9607"
+    }
+  ],
+  "validation_data": [
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_validation_precise.csv",
+      "sha256": "663a9562d622fe3e78c3ed8f8f3a287a6df8a02d951dd605f25febb817580f9c"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_validation.csv",
+      "sha256": "c0380bde20df8770656ead1c7f073d77ff244f81efd6cf12559c75802d000989"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_v3_repeat.csv",
+      "sha256": "444c87e30358a6904c1a6f5021e25460ca268b660334daa2e3cb3b24ae8c0cda"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/static_gravity_extrema_validation.csv",
+      "sha256": "c64be3bb3f693f4c235b16c9d9cf9e77c6771aec775fc793793b4b0ffce1b89b"
+    }
+  ],
+  "friction_models": [
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j1_friction_model_v2.json",
+      "sha256": "cbe242175e27531b1aa6b75ba6f3d0162660f8d96c286af1f8c8fc648c310f39"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j2_friction_model_v2.json",
+      "sha256": "d1f77c05016efbc53a4f76c2b0fbed7a97e1d7bb00f0f11cb53557f19f31d4e2"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j3_friction_model_v2.json",
+      "sha256": "722b73458d2bd25d0c874a038a7af51d15cb4cd502f383e05d41a3b377c9c91b"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j4_friction_model_v2.json",
+      "sha256": "e275f418acf49d1bfef40961ff35bfb1d59aacde452d3ba3875a6282edcc5258"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j5_friction_model_v2.json",
+      "sha256": "7b7a436d45f1980f7a0bc9a1109f8f56dee555e09cd4bacd81933825dbdbcc3e"
+    },
+    {
+      "file": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j6_friction_model_v2.json",
+      "sha256": "80d010436d0b4874185b492f158b020f6baf8b87dcd700078258617296a7567b"
+    }
+  ],
+  "torque_offsets_subtracted_nm": [
+    -0.0005135883960789005,
+    -0.18314468705165493,
+    0.0332133405611035,
+    -0.12497754011353851,
+    0.0045901822422176625,
+    0.009610875724015713
+  ],
   "gravity_scale": [
     1.0,
-    0.6977780878035917,
+    0.8913045064533454,
     1.0,
     1.0,
     1.0,
@@ -31,19 +82,19 @@
   ],
   "unselected_fitted_scale": [
     1.0,
-    0.6977780878035917,
-    0.9676811397327315,
-    0.9463593912331747,
-    -2.590741306078791,
-    16.53920326747798
+    0.8913045064533454,
+    0.9779154348682532,
+    1.0710798897145557,
+    0.6495173158817507,
+    -7.589102709298357
   ],
   "validation_rmse_nm": [
-    0.054142430661290014,
-    0.15068679759839726,
-    0.179342791116854,
-    0.07857048127273548,
-    0.11292424136326507,
-    0.0961053348225632
+    0.04211281731851997,
+    0.15422628754261916,
+    0.2660797348771773,
+    0.11325817884289417,
+    0.09291225940607759,
+    0.08642165560512846
   ],
   "validation_rmse_limit_nm": [
     0.2,
@@ -53,89 +104,125 @@
     0.15,
     0.15
   ],
-  "validation_overall_nominal_rmse_nm": 0.1735756974264588,
-  "validation_overall_selected_rmse_nm": 0.11969627583332997,
+  "validation_overall_nominal_rmse_nm": 0.15364675756132284,
+  "validation_overall_selected_rmse_nm": 0.14450286504903248,
   "calibrated_q_min_rad": [
     -0.00019073486328125,
-    0.24986648559570312,
-    0.4232473373413086,
-    -0.5502786636352539,
-    -1.2008857727050781,
-    -0.029564857482910156
+    0.21953868865966797,
+    0.3763256072998047,
+    -0.5727853775024414,
+    -1.2010765075683594,
+    -0.6425952911376953
   ],
   "calibrated_q_max_rad": [
     -0.00019073486328125,
-    0.8197908401489258,
-    1.1215381622314453,
+    0.822270393371582,
+    1.161402702331543,
     0.10051918029785156,
-    1.2001218795776367,
-    0.02841949462890625
+    1.2006940841674805,
+    0.7852668762207031
   ],
   "joint_diagnostics": [
     {
-      "joint": "joint1",
+      "joint": 1,
       "fitted_scale": 1.0,
       "selected": false,
-      "gravity_range_nm": 1.4550555855682989e-16,
-      "nominal_rmse_nm": 0.054142430661290014,
-      "scaled_rmse_nm": 0.05414243066129001,
-      "improvement_fraction": 1.1102230246251565e-16,
-      "validation_r2": -215.19169939781656
+      "training_refit_scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_training_relative_difference": 0.0,
+      "pooled_validation_gravity_range_nm": 5.342930199832285e-16,
+      "pooled_nominal_rmse_nm": 0.04211281731851997,
+      "pooled_scaled_rmse_nm": 0.04211281731851997,
+      "pooled_improvement_fraction": 0.0,
+      "all_validation_sets_nonworse": true
     },
     {
-      "joint": "joint2",
-      "fitted_scale": 0.6977780878035917,
+      "joint": 2,
+      "fitted_scale": 0.8913045064533454,
       "selected": true,
-      "gravity_range_nm": 1.302866803479461,
-      "nominal_rmse_nm": 0.34280381663968984,
-      "scaled_rmse_nm": 0.15068679759839726,
-      "improvement_fraction": 0.5604284716678656,
-      "validation_r2": 0.856376802991838
+      "training_refit_scales": [
+        0.833512119739185,
+        0.8694221550579146,
+        0.9255954796353516
+      ],
+      "max_training_relative_difference": 0.06484022721272464,
+      "pooled_validation_gravity_range_nm": 4.547111860701595,
+      "pooled_nominal_rmse_nm": 0.20035777094875254,
+      "pooled_scaled_rmse_nm": 0.15422628754261916,
+      "pooled_improvement_fraction": 0.23024554120205742,
+      "all_validation_sets_nonworse": true
     },
     {
-      "joint": "joint3",
-      "fitted_scale": 0.9676811397327315,
+      "joint": 3,
+      "fitted_scale": 0.9779154348682532,
       "selected": false,
-      "gravity_range_nm": 0.4524565620134249,
-      "nominal_rmse_nm": 0.179342791116854,
-      "scaled_rmse_nm": 0.20776924017991227,
-      "improvement_fraction": -0.1585034385047377,
-      "validation_r2": -0.34499254958138015
+      "training_refit_scales": [
+        0.9600599509129093,
+        1.0081576310192797,
+        0.9796130838325466
+      ],
+      "max_training_relative_difference": 0.03092516497103946,
+      "pooled_validation_gravity_range_nm": 3.1339199234877917,
+      "pooled_nominal_rmse_nm": 0.2660797348771773,
+      "pooled_scaled_rmse_nm": 0.2822678584524271,
+      "pooled_improvement_fraction": -0.06083937050945365,
+      "all_validation_sets_nonworse": false
     },
     {
-      "joint": "joint4",
-      "fitted_scale": 0.9463593912331747,
+      "joint": 4,
+      "fitted_scale": 1.0710798897145557,
       "selected": false,
-      "gravity_range_nm": 0.1392884826264189,
-      "nominal_rmse_nm": 0.07857048127273548,
-      "scaled_rmse_nm": 0.05053916624087884,
-      "improvement_fraction": 0.35676649268004046,
-      "validation_r2": -1.1500776939981607
+      "training_refit_scales": [
+        1.08714821313185,
+        1.0479055565551523,
+        1.0536480869452178
+      ],
+      "max_training_relative_difference": 0.021636418890825612,
+      "pooled_validation_gravity_range_nm": 0.5594106086144943,
+      "pooled_nominal_rmse_nm": 0.11325817884289417,
+      "pooled_scaled_rmse_nm": 0.12140973947823544,
+      "pooled_improvement_fraction": -0.07197326249302205,
+      "all_validation_sets_nonworse": false
     },
     {
-      "joint": "joint5",
-      "fitted_scale": -2.590741306078791,
+      "joint": 5,
+      "fitted_scale": 0.6495173158817507,
       "selected": false,
-      "gravity_range_nm": 0.05029686554190845,
-      "nominal_rmse_nm": 0.11292424136326507,
-      "scaled_rmse_nm": 0.1242519992658098,
-      "improvement_fraction": -0.10031289797293885,
-      "validation_r2": -0.22495696782820374
+      "training_refit_scales": [
+        -2.6012930749720424,
+        0.7380234209115665,
+        0.6108353778178629
+      ],
+      "max_training_relative_difference": 5.004963395688171,
+      "pooled_validation_gravity_range_nm": 0.621633231517263,
+      "pooled_nominal_rmse_nm": 0.09291225940607759,
+      "pooled_scaled_rmse_nm": 0.08441445380497153,
+      "pooled_improvement_fraction": 0.09146054197181852,
+      "all_validation_sets_nonworse": false
     },
     {
-      "joint": "joint6",
-      "fitted_scale": 16.53920326747798,
+      "joint": 6,
+      "fitted_scale": -7.589102709298357,
       "selected": false,
-      "gravity_range_nm": 4.916706572507504e-05,
-      "nominal_rmse_nm": 0.0961053348225632,
-      "scaled_rmse_nm": 0.10241786754587798,
-      "improvement_fraction": -0.0656834788096774,
-      "validation_r2": -0.2637223633002552
+      "training_refit_scales": [
+        7.2405876541244325,
+        -54.71818568838089,
+        26.99763342115322
+      ],
+      "max_training_relative_difference": 6.2100995050888965,
+      "pooled_validation_gravity_range_nm": 0.0008871302246914639,
+      "pooled_nominal_rmse_nm": 0.08642165560512846,
+      "pooled_scaled_rmse_nm": 0.08219799045640279,
+      "pooled_improvement_fraction": 0.04887276365109383,
+      "all_validation_sets_nonworse": true
     }
   ],
   "limitations": [
-    "no known calibration payload was attached, so absolute motor torque scale is not independently traceable",
-    "model is validated for static gravity inside the recorded joint envelope only",
-    "constant feedback offsets were not added to commanded torque"
+    "joint1 and joint6 gravity are structurally unobservable in this mechanism",
+    "standard URDF has no per-joint gravity-scale field; use this calibration in the gravity controller",
+    "low-stiffness hardware validation is blocked by cross-axis motorbridge feedback corruption; see gravity_hardware_validation_20261109.json"
   ]
 }

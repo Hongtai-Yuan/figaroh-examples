@@ -93,6 +93,29 @@ GRAVITY_V3_VALIDATION_POSES = np.array(
     ],
     dtype=float,
 )
+# Gravity-extrema poses selected from 40k random candidates.  The target and
+# both approach pre-poses were checked against the collision meshes; each set
+# independently spans large nominal gravity ranges on joints 3--5.
+GRAVITY_EXTREMA_TRAIN_POSES = np.array(
+    [[0, .780333, .506806, .075569, .015416, -.641901],
+     [0, .797020, .525995, .063528, -.031432, .339777],
+     [0, .244251, 1.160408, .069518, .456238, .687785],
+     [0, .236175, 1.145456, .055322, .240452, -.216423],
+     [0, .761959, .934798, -.252374, -.001445, .479661],
+     [0, .525502, .715614, -.264748, -.008527, .563333],
+     [0, .286958, 1.127369, .031688, -1.109843, .785077],
+     [0, .236978, 1.058478, .060278, 1.075526, .214242],
+     [0, .763118, .377230, -.532417, 1.104541, -.189674],
+     [0, .805505, .458262, -.555709, 1.072430, .304139],
+     [0, .813427, .464320, -.563499, -1.068666, .246655],
+     [0, .752541, .461043, -.572456, -1.144347, -.117685]], dtype=float)
+GRAVITY_EXTREMA_VALIDATION_POSES = np.array(
+    [[0, .734261, .472612, .065087, .057933, .119348],
+     [0, .238042, 1.156571, -.025871, -.908215, -.423338],
+     [0, .800921, 1.052330, -.319179, .006627, .526657],
+     [0, .290364, 1.157736, .047186, 1.053328, -.046102],
+     [0, .782919, .379700, -.552437, 1.047054, .692911],
+     [0, .805346, .403698, -.548708, -1.129735, -.523913]], dtype=float)
 APPROACH_DELTA = np.array([0.0, 0.055, 0.055, 0.040, 0.050, 0.0])
 
 
@@ -158,7 +181,10 @@ def move(node: StaticRecorder, target: np.ndarray, duration: float) -> None:
     msg.data = [*target.tolist(), duration, 0.003]
     node.target_pub.publish(msg)
     wait_busy(node, True, 2.0)
-    wait_busy(node, False, duration + 4.0)
+    # The driver lengthens large multi-axis moves to satisfy its per-joint
+    # velocity limits.  Wait for that safe retiming instead of treating it as
+    # a failure; the busy topic still guards command overlap.
+    wait_busy(node, False, duration + 8.0)
 
 
 def measure(node: StaticRecorder, target: np.ndarray, seconds: float):
@@ -189,7 +215,8 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=7301)
     parser.add_argument(
         "--pose-set",
-        choices=("train", "validation", "targeted", "gravity-v3-train", "gravity-v3-validation"),
+        choices=("train", "validation", "targeted", "gravity-v3-train", "gravity-v3-validation",
+                 "gravity-extrema-train", "gravity-extrema-validation"),
         default="train",
     )
     parser.add_argument("--settle", type=float, default=1.2)
@@ -204,6 +231,8 @@ def main() -> None:
         "targeted": TARGETED_POSES,
         "gravity-v3-train": GRAVITY_V3_TRAIN_POSES,
         "gravity-v3-validation": GRAVITY_V3_VALIDATION_POSES,
+        "gravity-extrema-train": GRAVITY_EXTREMA_TRAIN_POSES,
+        "gravity-extrema-validation": GRAVITY_EXTREMA_VALIDATION_POSES,
     }[args.pose_set]
 
     rclpy.init()
@@ -236,13 +265,31 @@ def main() -> None:
         node.received = node.rejected = 0
         rng = np.random.default_rng(args.seed)
         order = rng.permutation(len(poses))
+        if args.pose_set.startswith("gravity-extrema"):
+            # Nearest-neighbour ordering prevents a direct +wrist to -wrist
+            # jump from exceeding the driver's immutable 2.2 rad move limit.
+            remaining = list(range(len(poses)))
+            nearest = []
+            current = FORWARD_CENTER.copy()
+            while remaining:
+                index = min(
+                    remaining,
+                    key=lambda candidate: np.max(np.abs(poses[candidate] - current)),
+                )
+                nearest.append(index)
+                current = poses[index]
+                remaining.remove(index)
+            order = np.asarray(nearest, dtype=int)
         if args.max_poses is not None:
             if args.max_poses < 1:
                 raise ValueError("--max-poses must be positive")
             order = order[: args.max_poses]
         print(f"STARTED: {len(order)} poses x 2 approach directions", flush=True)
+        previous_target = FORWARD_CENTER.copy()
         for sequence, pose_id in enumerate(order, 1):
             target = poses[pose_id]
+            if np.max(np.abs(target - previous_target)) > 1.8:
+                move(node, FORWARD_CENTER, 3.0)
             for approach in (-1, 1):
                 pre = target + approach * APPROACH_DELTA
                 move(node, pre, 1.5)
@@ -250,6 +297,7 @@ def main() -> None:
                 time.sleep(args.settle)
                 q, tau, q_std, tau_std, count = measure(node, target, args.measure)
                 rows.append((int(pose_id), approach, count, q, tau, q_std, tau_std))
+            previous_target = target.copy()
             print(f"pose {sequence}/{len(order)} complete", flush=True)
     except Exception as exc:
         failure = exc
