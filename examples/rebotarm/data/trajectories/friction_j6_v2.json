@@ -1,0 +1,153 @@
+{
+  "schema": "rebotarm.safe_sysid_trajectory/v1",
+  "trajectory_type": "single_joint_bidirectional_friction",
+  "created_at": "2026-11-09T05:21:48.117636+00:00",
+  "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_sha256": "22ed7f1e0ab07f55752e2c7f49c80addf38cb5307daed1dc549501d8921ec6a2",
+  "trajectory_csv": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/trajectories/friction_j6_v2.csv",
+  "trajectory_sha256": "497af87a204c52089d71312b0f9a7bb9f85b19aa91c7b7956311e4175f6b281a",
+  "seed": null,
+  "joint": 6,
+  "commanded_speeds_rad_s": [
+    0.16,
+    0.4
+  ],
+  "duration_s": 52.4,
+  "sample_rate_hz": 50.0,
+  "centre_rad": [
+    0.0,
+    0.5235987756,
+    0.7853981634,
+    -0.2508652382,
+    0.0,
+    0.0
+  ],
+  "limits": {
+    "position_lower_rad": [
+      -0.6,
+      0.18,
+      0.32,
+      -0.7,
+      -0.9,
+      -0.9
+    ],
+    "position_upper_rad": [
+      0.6,
+      0.92,
+      1.25,
+      0.2,
+      0.9,
+      0.9
+    ],
+    "velocity_rad_s": [
+      0.65,
+      0.65,
+      0.65,
+      0.85,
+      0.95,
+      1.1
+    ],
+    "acceleration_rad_s2": [
+      1.8,
+      1.8,
+      1.8,
+      2.5,
+      3.0,
+      3.5
+    ],
+    "jerk_rad_s3": [
+      12.0,
+      12.0,
+      12.0,
+      18.0,
+      22.0,
+      26.0
+    ],
+    "nominal_torque_nm": [
+      18.9,
+      18.9,
+      18.9,
+      4.8999999999999995,
+      4.8999999999999995,
+      4.8999999999999995
+    ]
+  },
+  "constraint_report": {
+    "q_min_rad": [
+      0.0,
+      0.5235987756,
+      0.7853981634,
+      -0.2508652382,
+      0.0,
+      -0.48
+    ],
+    "q_max_rad": [
+      0.0,
+      0.5235987756,
+      0.7853981634,
+      -0.2508652382,
+      0.0,
+      0.48
+    ],
+    "max_abs_velocity_rad_s": [
+      0.0,
+      0.0,
+      3.552713678800501e-15,
+      8.881784197001252e-16,
+      0.0,
+      0.40000000000000313
+    ],
+    "max_abs_acceleration_rad_s2": [
+      0.0,
+      0.0,
+      2.6645352591003757e-13,
+      6.661338147750939e-14,
+      0.0,
+      0.7833816412398248
+    ],
+    "max_abs_jerk_rad_s3": [
+      0.0,
+      0.0,
+      1.1102230246251565e-11,
+      2.7755575615628914e-12,
+      0.0,
+      3.0164462153804
+    ],
+    "max_abs_nominal_torque_nm": [
+      1.2667296014232158e-05,
+      0.8913525554841485,
+      4.4311800812650475,
+      0.9445485208787454,
+      1.5431414901408482e-05,
+      0.0012582952865726267
+    ]
+  },
+  "driver_spline_300hz_report": {
+    "q_min_rad": [
+      0.0,
+      0.5235987756,
+      0.7853981634,
+      -0.2508652382,
+      0.0,
+      -0.4800004721065986
+    ],
+    "q_max_rad": [
+      0.0,
+      0.5235987756,
+      0.7853981634,
+      -0.2508652382,
+      0.0,
+      0.4800004721065986
+    ],
+    "max_abs_velocity_rad_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.40005081519360947
+    ],
+    "passed": true
+  },
+  "hardware_executed": false
+}

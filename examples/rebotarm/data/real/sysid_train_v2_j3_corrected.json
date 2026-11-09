@@ -1,0 +1,11 @@
+{
+  "schema": "rebotarm.friction_corrected_sysid_log/v1",
+  "created_at": "2026-11-09T05:36:43.734814+00:00",
+  "source": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/sysid_train_v2.csv",
+  "source_sha256": "a5e646845950be23b7834ef9099283c6842d88f0ac3a18bebb87820203e25f73",
+  "friction_model": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/j3_friction_model_v2.json",
+  "friction_model_sha256": "e732c62eb8614a3a254cbe5b6cb2c88cf7acdf3bc9f6798f0e1a7361bb540510",
+  "corrected_joint": 3,
+  "velocity_filter": "4th-order zero-phase Butterworth, 4 Hz",
+  "sample_rate_hz": 100.00000000000213
+}

@@ -1,0 +1,271 @@
+{
+  "schema": "rebotarm.validated_residual_dynamics/v2",
+  "created_at": "2026-11-09T05:47:19.333075+00:00",
+  "accepted": true,
+  "deployment_status": "validated_not_hardware_deployed",
+  "method": "accepted static gravity plus regularized viscous/Coulomb/bias residual",
+  "model_scope": "dynamic torque prediction; rigid inertial parameters remain nominal",
+  "urdf": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/urdf/rebotarm.urdf",
+  "urdf_sha256": "22ed7f1e0ab07f55752e2c7f49c80addf38cb5307daed1dc549501d8921ec6a2",
+  "gravity_model": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/results/static_gravity_model.json",
+  "gravity_model_sha256": "a94a6a428ccb6cddd190acd5cffcf5df02ec887a45daf92358744835f36acfea",
+  "training_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/sysid_train_v2.csv",
+  "training_sha256": "a5e646845950be23b7834ef9099283c6842d88f0ac3a18bebb87820203e25f73",
+  "validation_data": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/real/sysid_validation_v2.csv",
+  "validation_sha256": "622414e1c5c82dca3eee92e89afde8fda26fbb2489435ae95f0e1eb8e2e0b837",
+  "hyperparameter_selection": {
+    "policy": "alternating 5 s blocked split of training data only",
+    "selected_transition_width_rad_s": 0.005,
+    "selected_ridge": 10.0,
+    "internal_cv_rmse_nm": 0.3164688263837881,
+    "trials": [
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 10.0,
+        "rmse_nm": 0.3164688263837881
+      },
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 31.6227766,
+        "rmse_nm": 0.31652815917742716
+      },
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 100.0,
+        "rmse_nm": 0.31673501935433596
+      },
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 316.227766,
+        "rmse_nm": 0.3175338952823863
+      },
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 1000.0,
+        "rmse_nm": 0.3209487482018825
+      },
+      {
+        "transition_width_rad_s": 0.005,
+        "ridge": 3162.27766,
+        "rmse_nm": 0.3327635843084263
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 10.0,
+        "rmse_nm": 0.32318396570738184
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 31.6227766,
+        "rmse_nm": 0.32304678630909706
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 100.0,
+        "rmse_nm": 0.32292556913707876
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 316.227766,
+        "rmse_nm": 0.32374670371434
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 1000.0,
+        "rmse_nm": 0.3277418778135805
+      },
+      {
+        "transition_width_rad_s": 0.01,
+        "ridge": 3162.27766,
+        "rmse_nm": 0.3409536625724479
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 10.0,
+        "rmse_nm": 0.3483024002087863
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 31.6227766,
+        "rmse_nm": 0.3481273485376392
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 100.0,
+        "rmse_nm": 0.34759487727665306
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 316.227766,
+        "rmse_nm": 0.34611415403526874
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 1000.0,
+        "rmse_nm": 0.3474126157322773
+      },
+      {
+        "transition_width_rad_s": 0.02,
+        "ridge": 3162.27766,
+        "rmse_nm": 0.36101502417169223
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 10.0,
+        "rmse_nm": 0.36570990648931584
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 31.6227766,
+        "rmse_nm": 0.3655334632378121
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 100.0,
+        "rmse_nm": 0.36499596448125793
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 316.227766,
+        "rmse_nm": 0.36349337001674664
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 1000.0,
+        "rmse_nm": 0.3623937064871414
+      },
+      {
+        "transition_width_rad_s": 0.03,
+        "ridge": 3162.27766,
+        "rmse_nm": 0.37703658422935243
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 10.0,
+        "rmse_nm": 0.38858729444556983
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 31.6227766,
+        "rmse_nm": 0.3884370237253287
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 100.0,
+        "rmse_nm": 0.3879799476869059
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 316.227766,
+        "rmse_nm": 0.38670895381468856
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 1000.0,
+        "rmse_nm": 0.38470794348747267
+      },
+      {
+        "transition_width_rad_s": 0.05,
+        "ridge": 3162.27766,
+        "rmse_nm": 0.40113485958067485
+      }
+    ]
+  },
+  "gravity_scale": [
+    1.0,
+    0.6977780878035917,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "coefficients": {
+    "viscous_nm_per_rad_s": [
+      0.0,
+      0.06579171710800144,
+      0.04603188582718313,
+      0.31518131856947723,
+      0.0757205192589317,
+      0.05786772703786303
+    ],
+    "coulomb_nm": [
+      0.3961450688296007,
+      0.5878889068556371,
+      1.4786008303717075,
+      0.11714449024781146,
+      0.10906941614294054,
+      0.10366011406518146
+    ],
+    "constant_bias_nm": [
+      -0.034150428359518294,
+      0.20196072880393412,
+      0.3199779701604239,
+      -0.09866845217403268,
+      0.024994818912133357,
+      0.0020810984161293566
+    ]
+  },
+  "training_rmse_nm": {
+    "overall": 0.3140874618303985,
+    "per_joint": [
+      0.18783019824083713,
+      0.30245636650745095,
+      0.672883786621692,
+      0.06390623964309622,
+      0.06716709135823017,
+      0.06146176971987083
+    ]
+  },
+  "validation": {
+    "nominal_rmse_nm": {
+      "overall": 0.6260321596450997,
+      "per_joint": [
+        0.384843339115246,
+        0.5814134918914078,
+        1.3447760432080549,
+        0.17087581693953752,
+        0.11801964065187168,
+        0.11748088552630316
+      ]
+    },
+    "identified_rmse_nm": {
+      "overall": 0.3337342912000599,
+      "per_joint": [
+        0.1826272613146669,
+        0.28146497745725674,
+        0.736491963211256,
+        0.06818905064757495,
+        0.06403012357501997,
+        0.06727701983967593
+      ]
+    },
+    "overall_improvement_fraction": 0.4669055158615889,
+    "per_joint_limit_nm": [
+      0.3,
+      0.4,
+      0.81,
+      0.15,
+      0.15,
+      0.15
+    ]
+  },
+  "acceptance_checks": {
+    "independent_files": true,
+    "validation_joint_rmse_within_limit": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "validation_overall_improvement_at_least_20_percent": true,
+    "finite_coefficients": true
+  },
+  "limitations": [
+    "absolute motor torque scale is not traceable to a calibrated external load cell",
+    "validated only inside the recorded position, velocity and payload envelope",
+    "constant bias may contain unmodelled gravity error and is not enabled for manual drag",
+    "hardware deployment requires a separate low-gain safety test"
+  ]
+}

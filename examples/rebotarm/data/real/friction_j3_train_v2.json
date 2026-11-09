@@ -1,0 +1,14 @@
+{
+  "schema": "rebotarm.dynamic_sysid_log/v1",
+  "recorded_at": "2026-11-09T05:32:55.845917+00:00",
+  "trajectory": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/trajectories/friction_j3_v2.csv",
+  "trajectory_sha256": "7e9497de6fff12f168f5cd124678d9c876af989ae35743960965cf3f5ef15edb",
+  "trajectory_seed": null,
+  "sample_rate_hz": 100.0,
+  "feedback_frames_received": 15459,
+  "feedback_frames_rejected": 0,
+  "max_valid_feedback_gap_s": 0.013376379999954224,
+  "position_units": "rad (URDF frame)",
+  "torque_units": "motor-reported Nm (URDF sign)",
+  "completed_and_returned_to_centre": true
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "rebotarm.dynamic_sysid_log/v1",
+  "recorded_at": "2026-11-09T05:28:31.921566+00:00",
+  "trajectory": "/home/nuc001/ibvs-migration/third_party/figaroh-examples/examples/rebotarm/data/trajectories/sysid_train_v2.csv",
+  "trajectory_sha256": "1ab8aab872e5851822d167ae19abc065719c95f5de4417d015ee84f9843c375b",
+  "trajectory_seed": 3101,
+  "sample_rate_hz": 100.0,
+  "feedback_frames_received": 15020,
+  "feedback_frames_rejected": 0,
+  "max_valid_feedback_gap_s": 0.004234790000055,
+  "position_units": "rad (URDF frame)",
+  "torque_units": "motor-reported Nm (URDF sign)",
+  "completed_and_returned_to_centre": true
+}
