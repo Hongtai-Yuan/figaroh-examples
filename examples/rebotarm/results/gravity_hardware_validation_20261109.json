@@ -26,6 +26,15 @@
     }
   ],
   "low_stiffness_result": "inconclusive",
+  "near_extreme_repeat_validation": {
+    "file": "data/real/static_gravity_extrema_repeat_20261109.csv",
+    "paired_pose_count": 6,
+    "row_count": 12,
+    "joint2_nominal_rmse_nm": 0.30262666811511896,
+    "joint2_scaled_rmse_nm": 0.24140483371013968,
+    "joint2_improvement_fraction": 0.2023015181916834,
+    "selected_scale_unchanged": true
+  },
   "transport_evidence": [
     "joint5 feedback became approximately equal to joint3 while joint5 was physically near zero",
     "joint2 feedback became exactly equal to joint4 in a later run",
